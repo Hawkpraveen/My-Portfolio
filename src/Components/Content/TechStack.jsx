@@ -1,65 +1,57 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import TechStackList from "../../All_Lists/TechStackList";
-import { Card } from "flowbite-react";
 
 function TechStack() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
-  }, [1000]);
+  }, []);
 
   return (
-    <div
-      id="TechStack"
-      className="bg-white text-black dark:bg-slate-900  dark:text-white md:p-24 p-7 flex flex-col items-center min-h-screen pb-1 w-full overflow-hidden"
-    >
-      <h1
-        data-aos="fade-down"
-        data-aos-offset="300"
-        data-aos-easing="ease-out-sine"
-        className="text-4xl md:text-5xl font-semibold mb-6 leading-normal uppercase text-fuchsia-500"
-      >
-        Tech Stack
-      </h1>
-      <div className="grid  md:grid-cols-2 grid-cols-1 justify-around gap-8 p-2 ">
-        {TechStackList.map((tech, index) => (
-          <div
-            key={index}
-            data-aos-offset="200"
-            data-aos-easing="ease-out-sine"
-            data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}
-            className=" flex font-semibold text-fuchsia-800 rounded-3xl h-full  border-2 border-fuchsia-800 border-glow"
-          >
-            <div   className=" w-full h-full ">
-              <h1 className="flex justify-center text-3xl text-emerald-400 mt-2">
-                {tech.title}
-              </h1>
-              <div className="w-full  flex  justify-evenly mt-2 flex-wrap p-3">
-                {tech.skills.map((skill, index) => {
+    <section id="TechStack" className="section-band tech-section">
+      <div className="section-shell py-24">
+        <header className="section-heading" data-aos="fade-up">
+          <div className="eyebrow">TOOLS I USE TO SHIP</div>
+          <h2>
+            A practical stack for{" "}
+            <span className="gradient-text">real products.</span>
+          </h2>
+          <p>
+            Technologies I use across product engineering, backend systems,
+            full-stack delivery, and applied AI. The list reflects hands-on
+            work and current areas of exploration.
+          </p>
+        </header>
+
+        <div className="tech-grid">
+          {TechStackList.map((category, categoryIndex) => (
+            <article
+              className="tech-category"
+              key={category.title}
+              data-aos={categoryIndex % 2 === 0 ? "fade-up" : "fade-down"}
+            >
+              <h3 className="tech-category-heading">{category.title}</h3>
+              <ul className="tech-skill-list">
+                {category.skills.map((skill, skillIndex) => {
+                  const Icon = skill.icon;
                   return (
-                    <div
-                      data-aos-offset="100"
-                      data-aos-easing="ease-in-sine"
-                      data-aos={index % 2 === 0 ? "fade-up" : "fade-down"}
-                      key={index}
-                      className="hover:scale-110 transition-transform shadow-sky-500 border-2 border-violet-700 shadow-md p-3 m-2  flex w-full md:w-fit h-full gap-2 items-center rounded-full "
+                    <li
+                      className="tech-skill-pill"
+                      key={skill.name}
+                      data-aos={skillIndex % 2 === 0 ? "fade-up" : "fade-down"}
                     >
-                      <img
-                        src={skill.image}
-                        alt=""
-                        className="h-7 w-7 rounded-full"
-                      />
-                      <h1 className="text-lg text-orange-500">{skill.name}</h1>
-                    </div>
+                      <Icon className="tech-skill-icon" aria-hidden="true" />
+                      <span>{skill.name}</span>
+                    </li>
                   );
                 })}
-              </div>
-            </div>
-          </div>
-        ))}
+              </ul>
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

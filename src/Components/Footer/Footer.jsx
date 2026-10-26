@@ -1,54 +1,57 @@
-import React from "react";
 import { AiFillGithub } from "react-icons/ai";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaArrowUpRightFromSquare, FaLinkedinIn } from "react-icons/fa6";
 
 function Footer() {
-  const social = [
+  const socialLinks = [
     {
+      label: "LinkedIn",
       link: "https://www.linkedin.com/in/praveen-kumar-496255190/",
       icon: <FaLinkedinIn />,
     },
     {
+      label: "GitHub",
       link: "https://github.com/Hawkpraveen",
       icon: <AiFillGithub />,
     },
   ];
 
   return (
-    <footer className="md:flex md:px-10 lg:flex bg-white dark:bg-slate-800 text-black dark:text-white lg:px-48 px-4 py-5 justify-between border-t border-slate-800">
-      <div>
-        <h2 className="text-[22px] font-semibold text-fuchsia-800 py-2">
-          Copyright © 2024. All rights are reserved
-        </h2>
+    <footer>
+      <div className="footer-brand-block">
+        <a href="#Home" className="footer-brand" aria-label="Praveen Kumar — back to home">
+          Praveen Kumar
+        </a>
+        <h2>© {new Date().getFullYear()}</h2>
+        <p className="footer-tagline">
+          Designed with intention. Built with curiosity and code.
+        </p>
+        <a className="footer-back-top" href="#Home">
+          Back to top ↑
+        </a>
       </div>
-      <div className="md:flex lg:flex gap-10 ">
+
+      <div className="footer-details">
         <div>
-          <h2 className="text-[22px] font-semibold text-fuchsia-800 py-2  uppercase">
-            Contact
-          </h2>
-          <a
-            href="mailto:chiragjain.jain7@gmail.com"
-            className="text-[16px]  hover:text-fuchsia-800 transition-all duration-150 ease-in-out cursor-pointer"
-          >
-            Email: praveen.pk200109@gmail.com
+          <h2>Get in touch</h2>
+          <a href="mailto:praveen.pk200109@gmail.com">
+            praveen.pk200109@gmail.com
           </a>
-          <p className="text-[16px] pb-5 hover:text-fuchsia-800 transition-all duration-150 ease-in-out">
-            Phone: +91 8778750721
-          </p>
+          <p>Based in Chennai, India</p>
         </div>
         <div>
-          <h2 className="text-[22px] font-semibold text-fuchsia-800 py-2 uppercase">
-            Follow Me
-          </h2>
-          <div className="flex space-x-4  justify-center">
-            {social.map((social, index) => (
+          <h2>Around the web</h2>
+          <div className="footer-socials">
+            {socialLinks.map((social) => (
               <a
-                key={index}
-                target="_blank"
+                key={social.label}
                 href={social.link}
-                className=" hover:text-fuchsia-800 transition-all duration-150 ease-in-out"
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${social.label} profile`}
+                title={social.label}
               >
-                <div className="text-[28px]">{social.icon}</div>
+                {social.icon}
+                <FaArrowUpRightFromSquare className="footer-social-arrow" />
               </a>
             ))}
           </div>

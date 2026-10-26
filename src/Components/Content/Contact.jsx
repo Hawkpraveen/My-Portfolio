@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Card } from "flowbite-react";
+import {
+  FaArrowUpRightFromSquare,
+  FaEnvelope,
+  FaGithub,
+  FaLinkedinIn,
+  FaPaperPlane,
+} from "react-icons/fa6";
 
 function Contact() {
-  // Initialize AOS for animation
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -19,13 +24,13 @@ function Contact() {
     message: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     emailjs
       .send(
@@ -34,108 +39,130 @@ function Contact() {
         formData,
         "R5usoxBDGBm_ExYMl"
       )
-      .then((response) => {
-        //console.log("Email successfully sent!", response.status, response.text);
-        // Reset form
+      .then(() => {
         setFormData({ name: "", email: "", subject: "", message: "" });
         toast.success("Email successfully sent!");
       })
-      .catch((err) => {
-        console.error("There was an error sending the email", err);
+      .catch((error) => {
+        console.error("There was an error sending the email", error);
         toast.error("Failed to send email. Please try again later.");
       });
   };
 
   return (
-    <div
-      id="Contact"
-      className="bg-white text-black dark:bg-slate-900 dark:text-white md:px-10 md:py-32 px-3 py-2 flex flex-col items-center min-h-screen pb-1 w-full"
-    >
-      <h1
-        data-aos="fade-down"
-        data-aos-offset="300"
-        data-aos-easing="ease-in-sine"
-        className="text-4xl md:text-5xl font-semibold mb-4 leading-normal uppercase text-fuchsia-500"
-      >
-        Contact Me
-      </h1>
-      <Card
-        className="md:w-1/2 w-full "
-        data-aos="fade-up"
-        data-aos-offset="150"
-        data-aos-easing="ease-in-sine"
-      >
-        <form onSubmit={handleSubmit} className="flex flex-wrap  w-full">
-          <div className="dark:text-slate-300 w-full">
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full h-14 mb-4 rounded-lg p-4 border-2 border-fuchsia-800 border-glow  bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
-              placeholder="Enter Your Full Name"
-              required
-              data-aos="fade-left"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-sine"
-            />
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full h-14 mb-4 rounded-lg p-4 border-2 border-fuchsia-800 border-glow  bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
-              placeholder="Enter Your Email"
-              required
-              data-aos="fade-right"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-sine"
-            />
-            <input
-              type="text"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              className="w-full h-14 mb-4 rounded-lg p-4 border-2 border-fuchsia-800 border-glow  bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
-              placeholder="Enter Subject"
-              required
-              data-aos="fade-left"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-sine"
-            />
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full  mb-4 rounded-lg bg-white dark:bg-slate-800 p-4 border-2 border-fuchsia-800 border-glow  focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
-              placeholder="Enter Your Message..."
-              cols="20"
-              rows="5"
-              required
-              data-aos="fade-right"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-sine"
-            ></textarea>
-          </div>
+    <section id="Contact" className="section-band contact-section">
+      <header className="section-heading" data-aos="fade-up">
+        <div className="eyebrow">LET’S TALK</div>
+        <h2>
+          Have something{" "}
+          <span className="gradient-text">worth building?</span>
+        </h2>
+        <p>
+          Share a product idea, an engineering opportunity, or a question about
+          my work. I’d be glad to hear from you.
+        </p>
+      </header>
 
-          <div
-            className="flex mx-auto"
-            data-aos="fade-down"
-            data-aos-offset="100"
-            data-aos-easing="ease-in-sine"
-          >
-            <button
-              className="nano-button shadow-xl hover:shadow-fuchsia-800/50 text-black dark:text-zinc-200 border-2 hover:bg-fuchsia-800 border-fuchsia-800 rounded-lg px-8 py-3 uppercase hover:scale-110 transition-transform   border-glow focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
-              type="submit"
-            >
-              Send Message
-            </button>
+      <div className="contact-layout">
+        <aside className="contact-note" data-aos="fade-right">
+          <div>
+            <span className="eyebrow">OPEN TO GOOD CONVERSATIONS</span>
+            <h3>Thoughtful products start with a clear conversation.</h3>
+            <p>
+              I’m interested in useful software, dependable backend systems,
+              and carefully built AI experiences. Let’s talk about what you’re
+              working on.
+            </p>
           </div>
-        </form>
-      </Card>
+          <div className="contact-details">
+            <a href="mailto:praveen.pk200109@gmail.com" className="contact-detail">
+              <FaEnvelope aria-hidden="true" />
+              <span>praveen.pk200109@gmail.com</span>
+            </a>
+            <a
+              href="https://github.com/Hawkpraveen"
+              target="_blank"
+              rel="noreferrer"
+              className="contact-detail"
+            >
+              <FaGithub aria-hidden="true" />
+              <span>GitHub profile</span>
+              <FaArrowUpRightFromSquare className="contact-external-icon" aria-hidden="true" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/praveen-kumar-496255190/"
+              target="_blank"
+              rel="noreferrer"
+              className="contact-detail"
+            >
+              <FaLinkedinIn aria-hidden="true" />
+              <span>LinkedIn profile</span>
+              <FaArrowUpRightFromSquare className="contact-external-icon" aria-hidden="true" />
+            </a>
+          </div>
+        </aside>
+
+        <div className="contact-form-card" data-aos="fade-up">
+          <form onSubmit={handleSubmit}>
+            <div className="form-field">
+              <label htmlFor="contact-name">Your name</label>
+              <input
+                id="contact-name"
+                type="text"
+                name="name"
+                autoComplete="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="e.g. Alex Morgan"
+                required
+              />
+            </div>
+            <div className="form-field">
+              <label htmlFor="contact-email">Email address</label>
+              <input
+                id="contact-email"
+                type="email"
+                name="email"
+                autoComplete="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+            <div className="form-field">
+              <label htmlFor="contact-subject">Subject</label>
+              <input
+                id="contact-subject"
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="What would you like to discuss?"
+                required
+              />
+            </div>
+            <div className="form-field">
+              <label htmlFor="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="A little context helps me get back to you."
+                rows="5"
+                required
+              />
+            </div>
+            <button className="btn-primary" type="submit">
+              Send message <FaPaperPlane aria-hidden="true" />
+            </button>
+          </form>
+        </div>
+      </div>
 
       <ToastContainer />
-    </div>
+    </section>
   );
 }
 

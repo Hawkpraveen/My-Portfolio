@@ -1,9 +1,10 @@
-import React from "react";
 import Navbar from "./Components/Header/Navbar";
 import Home from "./Components/Content/Home";
 import About from "./Components/Content/About";
 import TechStack from "./Components/Content/TechStack";
 import Projects from "./Components/Content/Projects";
+import Experience from "./Components/Content/Experience";
+import GitHubShowcase from "./Components/Content/GitHubShowcase";
 import Contact from "./Components/Content/Contact";
 import Footer from "./Components/Footer/Footer";
 import { useEffect, useState } from "react";
@@ -12,12 +13,13 @@ import { RotatingTriangles } from "react-loader-spinner";
 function App() {
   const [loading, setLoading] = useState(false);
 
-  //for loading screen
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
+    const loadingTimeout = window.setTimeout(() => {
       setLoading(false);
     }, 1500);
+
+    return () => window.clearTimeout(loadingTimeout);
   }, []);
 
   return (
@@ -40,8 +42,10 @@ function App() {
           <Navbar />
           <Home />
           <About />
+          <Experience />
           <TechStack />
           <Projects />
+          <GitHubShowcase />
           <Contact />
           <Footer />
         </>
