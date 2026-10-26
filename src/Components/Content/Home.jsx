@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedinIn, FaArrowDown, FaArrowUpRightFromSquare, FaCode, FaTerminal } from "react-icons/fa6";
-import img from "../../assets/profile.jpg";
+import img from "../../assets/praveen-profile.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ReactTyped } from "react-typed";
